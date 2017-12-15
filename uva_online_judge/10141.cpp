@@ -46,9 +46,9 @@ int main()
 			}
 			
 			double compliance = n_reqs / (n * 1.0);
-			//cout << "debug compliance: " << compliance << endl;
+			
 			if (compliance > max_compliance or (compliance == max_compliance and v < min_value))
-			{
+			{l
 				r = aux;
 				max_compliance = compliance;
 				min_value = v;
