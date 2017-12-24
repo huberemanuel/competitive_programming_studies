@@ -9,6 +9,8 @@ int main()
 	
 	while(cin >> m >> n and (m != 0 and n != 0))
 	{
+		if (cases > 1) cout << endl;
+		
 		int game[m][n];
 		
 		for (int i = 0; i < m; i++)
@@ -44,8 +46,6 @@ int main()
 					
 				if (i + 1 < m and j - 1 >= 0 and game[i + 1][j - 1] != -1)
 					game[i + 1][j - 1]++;
-					
-				cout << ((i - 1 >= 0 and j + 1 < n and game[i - 1][j + 1] != -1) ? "true" : "false") << endl;
 					
 				if (i - 1 >= 0 and j + 1 < n and game[i - 1][j + 1] != -1)
 					game[i - 1][j + 1]++;
