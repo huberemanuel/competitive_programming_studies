@@ -21,7 +21,7 @@ int main()
 		reverse(aux_reversed.begin(), aux_reversed.end());
 		
 		if (aux == aux_reversed)
-			cout << "You won’t be eaten!" << endl;
+			cout << "You won't be eaten!" << endl;
 		else
 			cout << "Uh oh.." << endl;
 	}
