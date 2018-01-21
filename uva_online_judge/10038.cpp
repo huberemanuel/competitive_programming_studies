@@ -17,7 +17,7 @@ int main()
         {
             int a;
             cin >> a;
-            numbers[abs(abs(aux) - abs(a))] = true;
+            numbers[abs(aux - a)] = true;
             aux = a;
         }
 
