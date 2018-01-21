@@ -31,3 +31,5 @@
 *.out
 *.appeDC, PST, CFG, SESE, Relyzer
 
+input
+output
