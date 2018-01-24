@@ -9,11 +9,10 @@ int main()
 	while (cin >> code and code != "#")
 	{
 		if (not	next_permutation(code.begin(), code.end()))
-			cout << "No Successor." << endl;
+			cout << "No Successor" << endl;
 		else 
 			cout << code << endl;
 	}
-	
 	
 	return 0;
 }
