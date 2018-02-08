@@ -6,41 +6,23 @@ map<char, int> cards = {{'J', 1}, {'Q', 2}, {'K', 3}, {'A', 4}};
 
 int main()
 {
-    string line;
+    string aux;
 
-    while (getline(cin, line) and line != "#")
+    while (cin >> aux and static_cast<int>(aux.find("#")) == -1)
     {
-        stringstream  linestream (line);
         vector<string> dealer, non_dealer;
         deque<string> heap;
-        bool control = false, end_game = false;
+        bool control = false;
 
-        for (int i = 0; i < 13; ++i)
+        for (int i = 0; i < 52; ++i)
         {
-            string aux;
-            linestream >> aux;
             if (control)
                 dealer.push_back(aux);
             else
                 non_dealer.push_back(aux);
             control = !control;
-        }
-
-        for (int i = 0; i < 3; ++i)
-        {
-            getline(cin, line);
-            stringstream linestream(line);
-            for (int j = 0; j < 13; ++j)
-            {
-                string aux;
-                linestream >> aux;
-                if (control)
-                    dealer.push_back(aux);
-
-                else
-                    non_dealer.push_back(aux);
-                control = !control;
-            }
+            if (i != 51)
+				cin >> aux;
         }
         
         // control = true -> dealer playing
@@ -55,11 +37,11 @@ int main()
 
         while (true)
         {
+			
             if (cont_card == 0)
             {
                 if (special)
                 {
-
                     if (control)
                     {
                         non_dealer.insert(non_dealer.begin(), heap.begin(), heap.end());
@@ -74,9 +56,8 @@ int main()
                 cont_card = 1;
                 special = false;
             }
-
-			end_game = dealer.empty() || non_dealer.empty();
-			if (end_game) break;
+            
+            if ((control and dealer.empty()) or (!control and non_dealer.empty())) break;
 			
             if (control)
             {
@@ -88,7 +69,7 @@ int main()
                 played = non_dealer.back();
                 non_dealer.pop_back();
             }
-
+			
             heap.push_front(played);
             cont_card--;
 
@@ -100,9 +81,8 @@ int main()
             }
         }
 
-        int player = dealer.empty() ? 2 : 1;
-		cout << "heap: " << max(dealer.size(), non_dealer.size()) + heap.size() << endl;
-        cout << player << " " << max(dealer.size(), non_dealer.size()) << endl;
+        int player = !control ? 1 : 2;
+        printf("%d %2d\n", player, static_cast<int>(max(dealer.size(), non_dealer.size())));
 
     }
 
