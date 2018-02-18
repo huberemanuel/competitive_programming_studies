@@ -4,10 +4,24 @@ using namespace std;
 
 struct Order
 {
-	unsigned int time;
+	int time;
 	int total = -1;
 	bool side;
 };
+
+int find_min_time(vector<Order> orders)
+{
+	int min_time = 1000000;
+	for (int i = 0; i < static_cast<int>(orders.size()); i++)
+	{
+		if (orders[i].total == -1 and orders[i].time < min_time)
+		{
+			min_time = orders[i].time;
+		}
+	}
+	if (min_time == 1000000) min_time = 0;
+	return min_time;
+}
 
 int main()
 {
@@ -17,53 +31,55 @@ int main()
 	
 	for (int ci = 0; ci < c; ci++)
 	{
+		
 		if (ci > 0)
 			cout << endl;
 			
 		vector<Order> orders;
 		queue<Order*> Q;
 	
-		unsigned int n, t, m;
+		int n, t, m;
 		
 		cin >> n >> t >> m;
 		
-		for (unsigned int i = 0; i < m; i++)
+		for (int i = 0; i < m; i++)
 		{
 			int a;
 			string b;
 			cin >> a >> b;
-			//~ cin.ignore();
 			struct Order aux;
 			aux.time = a;
 			aux.side = b == "right";
 			orders.push_back(aux);
 		}
 		
-		unsigned int time = 0, processed = 0;
-		bool side = true; // true -> right
+		int time = 0, processed = 0;
+		bool side = false;
 		
-		while (orders.size() != processed)
+		while (true)
 		{
-			//~ cout << Q.size() << endl;
-			while (!Q.empty())
+
+			while (not Q.empty())
 			{
-				
-				auto aux = Q.back();
+				auto aux = Q.front();
 				aux->total = time;
 				Q.pop();
 				processed++;
 			}
 			
+			if (static_cast<int>(orders.size()) == processed) break;
+			
+			time = max(time, find_min_time(orders));
+
 			for (unsigned int i = 0; i < orders.size(); i++)
 			{
-				//~ cout << orders[i].time << endl;
-				//~ cout << orders[i].side << endl;
-				//~ cout << orders[i].total << endl;
-				//~ cout << time << endl;
 				
-				if (orders[i].time <= time and orders[i].side == side and orders[i].total == -1 and Q.size() <= n)
+				if (orders[i].time <= time and 
+					orders[i].side == side and 
+					orders[i].total == -1 and 
+					static_cast<int>(Q.size()) < n)
 				{
-					cout << "entrei" << endl;
+					
 					Q.push(&orders[i]);
 				}
 			}
