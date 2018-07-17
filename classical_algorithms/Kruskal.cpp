@@ -54,18 +54,15 @@ ll kruskal() {
 
 int main() {
   
-  while (cin >> N >> M, N && M)
-  {
-    edgeList.clear();
-    for (int i = 0; i < M; ++i)
-    {
-      int a, b, c; 
-      cin >> a >> b >> c;
-      edgeList.push_back(make_pair(c, make_pair(a, b)));
-    }
-
-    cout << kruskal() << endl;
-  }
+  N = 4;
+  M = 5;
+  edgeList.push_back(make_pair(10, make_pair(0, 1)));
+  edgeList.push_back(make_pair(9, make_pair(1, 2)));
+  edgeList.push_back(make_pair(8, make_pair(2, 3)));
+  edgeList.push_back(make_pair(7, make_pair(3, 1)));
+  edgeList.push_back(make_pair(1, make_pair(0, 3)));
+  
+  cout << kruskal() << endl;
 
   return 0;
 }
