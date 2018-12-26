@@ -33,3 +33,9 @@
 
 input
 output
+in
+out
+
+*~
+*.swp
+*.swo
