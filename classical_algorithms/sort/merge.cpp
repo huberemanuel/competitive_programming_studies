@@ -26,10 +26,10 @@ void mergesort(std::vector<T> &arr, std::vector<T> &aux, int left, int right)
 
 int main()
 {
-    std::vector<int> v = {-3, 2, 1, 5, -2};
+    std::vector<int> v = {5, 2, 3, -1, 4};
     std::vector<int> aux (v.size());
 
-    mergesort(v, aux, 0, v.size());
+    mergesort(v, aux, 0, v.size()-1);
 
     for (auto i : v) {
         std::cout << i << '\t';
