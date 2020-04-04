@@ -2,18 +2,25 @@
 
 using namespace std;
 
+// Computational cost: O(1)
+// Memory cost: O(1)
+
+long long pa_sum(long long lower, long long upper)
+{
+	int n = upper / lower;
+	return (2*lower + (n - 1)*lower)*n/2;	
+}
+
 int main()
 {
     int number;
 
     while (cin >> number) {
-        long long _sum = 0;
-        for (int i = 2; i < number; ++i) {
-            if (i % 3 == 0 || i % 5 == 0) {
-                _sum += i;
-            }
-        }
-        cout << _sum << endl;
+		number--;
+		long long result = pa_sum(3, number) +
+						   pa_sum(5, number) -
+						   pa_sum(15, number);
+        cout << result << endl;
     }
     return 0;
 }
